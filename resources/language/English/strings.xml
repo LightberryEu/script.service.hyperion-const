@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<strings>
+    <string id="31000">Configuration</string>
+    <string id="31002">LED color</string>
+    <string id="31003">Custom LED color</string>
+    <string id="31031">Red</string>
+    <string id="31032">Green</string>
+    <string id="31033">Blue</string>
+</strings>
