@@ -2,7 +2,7 @@
 <settings>
     <!--MAIN TAB-->
     <category label="31000">
-        <setting label="31002" id="constColor" type="labelenum" values="black|navy|blue(full)|blue|aqua|teal|olive|green(full)|green|lime|yellow|orange|red(full)|red|maroon|fuchsia|purple|white|silver|gray"/>
+        <setting label="31002" id="constColor" type="labelenum" default="black" values="black|navy|blue(full)|blue|aqua|teal|olive|green(full)|green|lime|yellow|orange|red(full)|red|maroon|fuchsia|purple|white|silver|gray"/>
         <setting label="31003" id="customColor" type="bool" default="false" enable="true"/>
         <setting label="31031" id="customColorR" type="slider" default="127" range="0,1,255" enable="eq(-1,true)"/>
         <setting label="31032" id="customColorG" type="slider" default="127" range="0,1,255" enable="eq(-2,true)"/>

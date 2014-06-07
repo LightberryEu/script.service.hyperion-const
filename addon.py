@@ -1,4 +1,4 @@
-#  Copyright (C) 2014 lightberry.eu
+# Copyright (C) 2014 lightberry.eu
 #
 #  This Program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
 #  along with XBMC; see the file COPYING.  If not, write to
 #  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 #  http://www.gnu.org/copyleft/gpl.html
-import subprocess
+import subprocess, os
 import xbmcaddon
 
 __author__ = "Tomek (lightberry.eu)"
@@ -31,34 +31,41 @@ delayTime = 5000
 msgLine = ""
 exceptionLine = ""
 
-colors = { 'black': '000000',
-            'navy': '001F3F',
-            'blue(full)':'0000FF',
-            'blue': '0074D9',
-            'aqua': '7FDBFF',
-            'teal': '39CCCC',
-            'olive': '3D9970',
-            'green(full)':'00FF00',
-            'green': '2ECC40',
-            'lime': '01FF70',
-            'yellow': 'FFDC00',
-            'orange': 'FF851B',
-            'red(full)':'FF0000',
-            'red': 'FF4136',
-            'maroon': '85144B',
-            'fuchsia': 'F012BE',
-            'purple': 'B10DC9',
-            'white': 'FFFFFF',
-            'silver': 'DDDDDD',
-            'gray': 'AAAAAA' }
+colors = {'black': '000000',
+          'navy': '001F3F',
+          'blue(full)': '0000FF',
+          'blue': '0074D9',
+          'aqua': '7FDBFF',
+          'teal': '39CCCC',
+          'olive': '3D9970',
+          'green(full)': '00FF00',
+          'green': '2ECC40',
+          'lime': '01FF70',
+          'yellow': 'FFDC00',
+          'orange': 'FF851B',
+          'red(full)': 'FF0000',
+          'red': 'FF4136',
+          'maroon': '85144B',
+          'fuchsia': 'F012BE',
+          'purple': 'B10DC9',
+          'white': 'FFFFFF',
+          'silver': 'DDDDDD',
+          'gray': 'AAAAAA'}
 
-if(__settings__.getSetting('customColor')=='false'):
-    command = "hyperion-remote --color " + colors[__settings__.getSetting('constColor')]
+if (__settings__.getSetting('customColor') == 'false'):
+    if os.uname()[1] == "raspbmc":
+        hyperion = "hyperion-remote --color "
+    elif os.uname()[1] == "OpenELEC":
+        hyperion = "/storage/hyperion/bin/hyperion-remote.sh --color "
+    else :
+        hyperion = "hyperion-remote --color "
+
+    command = hyperion + colors[__settings__.getSetting('constColor')]
 else:
     R = int(float(__settings__.getSetting('customColorR')))
     G = int(float(__settings__.getSetting('customColorG')))
     B = int(float(__settings__.getSetting('customColorB')))
-    command = "hyperion-remote --color " + '{:02x}{:02x}{:02x}'.format(R,G,B)
+    command = "hyperion-remote --color " + '{:02x}{:02x}{:02x}'.format(R, G, B)
 
 subprocess.check_call(command, shell=True)
 
