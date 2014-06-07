@@ -52,20 +52,20 @@ colors = {'black': '000000',
           'silver': 'DDDDDD',
           'gray': 'AAAAAA'}
 
-if (__settings__.getSetting('customColor') == 'false'):
-    if os.uname()[1] == "raspbmc":
-        hyperion = "hyperion-remote --color "
-    elif os.uname()[1] == "OpenELEC":
-        hyperion = "/storage/hyperion/bin/hyperion-remote.sh --color "
-    else :
-        hyperion = "hyperion-remote --color "
+if os.uname()[1] == "raspbmc":
+    hyperion = "hyperion-remote --color "
+elif os.uname()[1] == "OpenELEC":
+    hyperion = "/storage/hyperion/bin/hyperion-remote.sh --color "
+else :
+    hyperion = "hyperion-remote --color "
 
+if (__settings__.getSetting('customColor') == 'false'):
     command = hyperion + colors[__settings__.getSetting('constColor')]
 else:
     R = int(float(__settings__.getSetting('customColorR')))
     G = int(float(__settings__.getSetting('customColorG')))
     B = int(float(__settings__.getSetting('customColorB')))
-    command = "hyperion-remote --color " + '{:02x}{:02x}{:02x}'.format(R, G, B)
+    command = hyperion + '{:02x}{:02x}{:02x}'.format(R, G, B)
 
 subprocess.check_call(command, shell=True)
 
